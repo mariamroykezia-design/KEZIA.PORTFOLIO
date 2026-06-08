@@ -1,0 +1,2152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kezia Mariam Roy | Cybersecurity Analyst & Digital Forensics Portfolio</title>
+    <!-- Google Fonts for futuristic & tech aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CYBERPUNK DESIGN SYSTEM --- */
+        :root {
+            --bg-base: #0a0a0c;
+            --bg-panel: #101014;
+            --bg-panel-overlay: rgba(16, 16, 20, 0.85);
+            --border-color: #1a1a24;
+            
+            /* Neon color scheme */
+            --neon-cyan: #00f0ff;
+            --neon-pink: #ff0055;
+            --neon-yellow: #fcee0a;
+            --neon-green: #39ff14;
+            --text-main: #e2e2e9;
+            --text-muted: #8c8c9e;
+            --text-dark: #4e4e5e;
+            
+            /* Glowing shadow effects */
+            --glow-cyan: 0 0 10px rgba(0, 240, 255, 0.35), 0 0 20px rgba(0, 240, 255, 0.15);
+            --glow-pink: 0 0 10px rgba(255, 0, 85, 0.35), 0 0 20px rgba(255, 0, 85, 0.15);
+            --glow-yellow: 0 0 10px rgba(252, 238, 10, 0.35);
+            --glow-green: 0 0 10px rgba(57, 255, 20, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--neon-cyan) var(--bg-base);
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- Custom Scrollbar --- */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+        body::-webkit-scrollbar-track {
+            background: var(--bg-base);
+            border-left: 1px solid var(--border-color);
+        }
+        body::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border: 2px solid var(--bg-base);
+            border-radius: 4px;
+        }
+        body::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* --- CRT Grid Scanlines --- */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        /* CRT Flicker Toggle */
+        body.crt-flicker::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: rgba(18, 16, 16, 0.1);
+            opacity: 0;
+            z-index: 10000;
+            pointer-events: none;
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.18; }
+            50% { opacity: 0.05; }
+            100% { opacity: 0.12; }
+        }
+
+        /* --- Interactive Matrix Background --- */
+        #cyber-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.08;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+
+        /* --- TYPOGRAPHY & HEADERS --- */
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .cyber-glitch-title {
+            position: relative;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .cyber-glitch-title::before, .cyber-glitch-title::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .cyber-glitch-title:hover::before {
+            left: -2px;
+            text-shadow: -2px 0 var(--neon-cyan);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+
+        .cyber-glitch-title:hover::after {
+            left: 2px;
+            text-shadow: -2px 0 var(--neon-pink);
+            clip: rect(85px, 450px, 140px, 0);
+            animation: glitch-anim-2 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(20px, 9999px, 66px, 0); }
+            100% { clip: rect(80px, 9999px, 5px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(70px, 9999px, 105px, 0); }
+            100% { clip: rect(12px, 9999px, 85px, 0); }
+        }
+
+        /* --- WEB PORTFOLIO LAYOUT --- */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        /* HUD Sidebar (Left) */
+        .hud-sidebar {
+            width: 380px;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            padding: 2.5rem 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        /* Main Content Container (Right) */
+        .main-content {
+            margin-left: 380px;
+            flex-grow: 1;
+            padding: 3rem;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        /* --- CYBER HUD MODULES --- */
+        .hud-profile {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        /* Profile Picture Hex Frame */
+        .profile-hex-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            background: var(--neon-cyan);
+            padding: 3px; /* border thickness */
+            box-shadow: var(--glow-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .profile-hex-container:hover {
+            background: var(--neon-pink);
+            filter: drop-shadow(0 0 15px rgba(255, 0, 85, 0.6));
+        }
+
+        .profile-hex-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            background: var(--bg-base);
+            display: block;
+        }
+
+        .hud-profile .user-name {
+            font-size: 1.8rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .hud-profile .user-title {
+            font-size: 0.95rem;
+            color: var(--neon-cyan);
+            font-family: 'Share Tech Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .user-status-badge {
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid var(--neon-cyan);
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+            border-radius: 3px;
+            color: var(--neon-cyan);
+            box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.1);
+        }
+        
+        .user-status-badge i {
+            margin-right: 0.4rem;
+            animation: pulse-green 1.5s infinite;
+        }
+        
+        @keyframes pulse-green {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* HUD Navigation Links */
+        .hud-nav {
+            margin-bottom: 2rem;
+        }
+
+        .hud-nav-list {
+            list-style: none;
+        }
+
+        .hud-nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .hud-nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.01);
+            transition: all 0.25s ease;
+        }
+
+        .hud-nav-link:hover, .hud-nav-link.active {
+            color: #fff;
+            border-left: 2px solid var(--neon-cyan);
+            background: rgba(0, 240, 255, 0.04);
+            text-shadow: var(--glow-cyan);
+        }
+        
+        .hud-nav-link i {
+            width: 25px;
+            font-size: 1rem;
+            color: var(--neon-cyan);
+            margin-right: 0.8rem;
+        }
+        
+        .hud-nav-link:hover i, .hud-nav-link.active i {
+            color: var(--neon-pink);
+            text-shadow: var(--glow-pink);
+        }
+
+        /* Sidebar HUD Controls */
+        .hud-controls {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+        
+        .hud-control-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--text-muted);
+        }
+
+        /* Switch toggles */
+        .hud-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .hud-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .hud-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--border-color);
+            transition: .3s;
+            border-radius: 10px;
+            border: 1px solid var(--text-dark);
+        }
+
+        .hud-slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--text-muted);
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .hud-slider {
+            background-color: rgba(0, 240, 255, 0.2);
+            border-color: var(--neon-cyan);
+        }
+
+        input:checked + .hud-slider:before {
+            transform: translateX(20px);
+            background-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* Contact HUD details */
+        .hud-contact-info {
+            margin-top: 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+        
+        .hud-contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            word-break: break-all;
+        }
+        
+        .hud-contact-item a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .hud-contact-item a:hover {
+            color: var(--neon-cyan);
+        }
+
+        .hud-contact-item i {
+            margin-right: 0.8rem;
+            color: var(--neon-cyan);
+            width: 16px;
+        }
+
+        /* --- PORTFOLIO SECTIONS --- */
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border-color);
+            scroll-margin-top: 2rem;
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: #fff;
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .section-header h2 span {
+            color: var(--neon-cyan);
+            text-shadow: var(--glow-cyan);
+        }
+
+        .section-header::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--neon-cyan), transparent);
+            margin-left: 20px;
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* --- DECORATIVE FUTURISTIC PANELS --- */
+        .cyber-panel {
+            background: var(--bg-panel-overlay);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--neon-cyan);
+            padding: 2rem;
+            position: relative;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Accent corner brackets */
+        .cyber-panel::before {
+            content: "";
+            position: absolute;
+            top: -1px; right: -1px;
+            width: 15px; height: 15px;
+            border-top: 2px solid var(--neon-cyan);
+            border-right: 2px solid var(--neon-cyan);
+        }
+
+        .cyber-panel::after {
+            content: "SEC-LOG // STATUS: ACTIVE";
+            position: absolute;
+            bottom: -8px; right: 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            background: var(--bg-base);
+            padding: 0 6px;
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+        }
+
+        .cyber-panel-title {
+            color: var(--neon-cyan);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .cyber-panel-title i {
+            margin-right: 0.8rem;
+        }
+
+        /* --- TERMINAL WINDOW COMPONENT --- */
+        .terminal-wrapper {
+            margin-bottom: 3rem;
+        }
+
+        .terminal-header {
+            background: #15151c;
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            padding: 0.6rem 1rem;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .terminal-btn.close { background-color: var(--neon-pink); }
+        .terminal-btn.minimize { background-color: var(--neon-yellow); }
+        .terminal-btn.maximize { background-color: var(--neon-cyan); }
+
+        .terminal-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .terminal-body {
+            background-color: #0b0b0e;
+            border: 1px solid var(--border-color);
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            font-family: 'Share Tech Mono', monospace;
+            padding: 1.5rem;
+            height: 320px;
+            overflow-y: auto;
+            color: var(--neon-green);
+            text-shadow: 0 0 5px rgba(57, 255, 20, 0.25);
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+            scrollbar-width: thin;
+        }
+
+        .terminal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+        .terminal-body::-webkit-scrollbar-track {
+            background: #0b0b0e;
+        }
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: #1a1a24;
+            border-radius: 3px;
+        }
+
+        .terminal-output {
+            flex-grow: 1;
+            margin-bottom: 1rem;
+        }
+
+        .terminal-welcome {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .terminal-line {
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            word-break: break-all;
+        }
+        
+        .terminal-line.cmd-echo {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 5px rgba(0, 240, 255, 0.25);
+        }
+
+        .terminal-line.success {
+            color: var(--neon-cyan);
+        }
+
+        .terminal-line.warning {
+            color: var(--neon-yellow);
+        }
+
+        .terminal-input-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .terminal-prompt {
+            color: var(--neon-cyan);
+            margin-right: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--neon-green);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            flex-grow: 1;
+            text-shadow: 0 0 5px rgba(57, 255, 20, 0.25);
+        }
+
+        /* --- TECHNICAL SKILLS --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: rgba(16, 16, 20, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-radius: 4px;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
+        }
+        
+        .skill-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--text-dark);
+            transition: background-color 0.3s;
+        }
+        
+        .skill-card:hover::before {
+            background: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+        }
+
+        .skill-card:hover .skill-icon {
+            color: var(--neon-pink);
+            text-shadow: var(--glow-pink);
+        }
+
+        .skill-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .skill-progress-container {
+            width: 100%;
+            height: 6px;
+            background: #202028;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            box-shadow: var(--glow-cyan);
+            width: 0%; /* Animated via JS scrolling */
+            transition: width 1.5s cubic-bezier(0.1, 0.8, 0.3, 1);
+        }
+        
+        .skill-level {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: right;
+            text-transform: uppercase;
+        }
+
+        /* --- EXPERIENCE TIMELINE (LOG TRACE) --- */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3.5rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Timeline Dot */
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-base);
+            border: 2px solid var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            margin-left: -1px;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            background: var(--neon-pink);
+            border-color: var(--neon-pink);
+            box-shadow: var(--glow-pink);
+            transform: scale(1.3);
+        }
+
+        .timeline-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timeline-role {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .timeline-company {
+            color: var(--neon-cyan);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        .timeline-date {
+            font-family: 'Share Tech Mono', monospace;
+            background: #1a1a24;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--neon-cyan);
+            border: 1px solid var(--border-color);
+        }
+
+        .timeline-content {
+            background: rgba(16, 16, 20, 0.4);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        .timeline-item:hover .timeline-content {
+            border-color: rgba(0, 240, 255, 0.25);
+        }
+
+        .timeline-bullets {
+            list-style: none;
+        }
+
+        .timeline-bullets li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        .timeline-bullets li:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-bullets li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--neon-pink);
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+        }
+
+        /* --- PROJECTS & ACHIEVEMENTS --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media(min-width: 900px) {
+            .projects-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .project-card {
+            background: rgba(16, 16, 20, 0.5);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 6px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card::after {
+            content: "";
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 3px; width: 0%;
+            background: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .project-card:hover::after {
+            width: 100%;
+        }
+
+        .project-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .project-title a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        
+        .project-title a:hover {
+            color: var(--neon-pink);
+            text-shadow: var(--glow-pink);
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-bullets {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-bullets li {
+            position: relative;
+            padding-left: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-bullets li::before {
+            content: "::";
+            position: absolute;
+            left: 0;
+            color: var(--neon-cyan);
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+        }
+
+        .project-tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            color: var(--neon-cyan);
+        }
+
+        /* --- EDUCATION & CREDENTIALS --- */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        @media(min-width: 900px) {
+            .edu-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .edu-card {
+            background: rgba(16, 16, 20, 0.4);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .edu-degree {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.15rem;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-institute {
+            font-size: 0.95rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .edu-meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Certifications List */
+        .cert-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media(min-width: 768px) {
+            .cert-list {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+
+        .cert-item {
+            background: rgba(16, 16, 20, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .cert-item:hover {
+            border-color: rgba(255, 0, 85, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.05);
+        }
+
+        .cert-icon {
+            font-size: 1.8rem;
+            color: var(--neon-pink);
+            text-shadow: var(--glow-pink);
+        }
+
+        .cert-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.2;
+        }
+        
+        .cert-issuer {
+            font-size: 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+            text-transform: uppercase;
+        }
+
+        /* --- CONTACT & FOOTER --- */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media(min-width: 900px) {
+            .contact-content {
+                grid-template-columns: 1fr 1.5fr;
+            }
+        }
+
+        .contact-details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .contact-box {
+            background: rgba(16, 16, 20, 0.4);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .contact-box:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.08);
+        }
+
+        .contact-box-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 4px;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-cyan);
+            font-size: 1.25rem;
+        }
+
+        .contact-box:hover .contact-box-icon {
+            color: var(--neon-pink);
+            border-color: rgba(255, 0, 85, 0.3);
+            background: rgba(255, 0, 85, 0.05);
+        }
+
+        .contact-box-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-box-value {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.1rem;
+            margin-top: 0.15rem;
+        }
+        
+        .contact-box-value a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .contact-box-value a:hover {
+            color: var(--neon-cyan);
+        }
+
+        /* Contact Cyber Form */
+        .cyber-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+        
+        .form-group-full {
+            grid-column: span 2;
+        }
+
+        .cyber-input-group {
+            position: relative;
+        }
+
+        .cyber-label {
+            display: block;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            letter-spacing: 1px;
+        }
+
+        .cyber-input {
+            width: 100%;
+            background: #111116;
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1rem;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .cyber-input:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            background: #14141d;
+        }
+
+        textarea.cyber-input {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .cyber-btn {
+            grid-column: span 2;
+            background: linear-gradient(135deg, var(--neon-pink), #a30036);
+            border: none;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .cyber-btn:hover {
+            background: linear-gradient(135deg, var(--neon-cyan), #00a4b0);
+            box-shadow: var(--glow-cyan);
+            color: #000;
+            transform: translateY(-2px);
+        }
+        
+        .cyber-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .cyber-btn::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+
+        .footer {
+            margin-top: 5rem;
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-left span {
+            color: var(--text-muted);
+        }
+        
+        .footer-right a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 1rem;
+            transition: color 0.2s;
+        }
+        .footer-right a:hover {
+            color: var(--neon-cyan);
+        }
+
+        /* --- GLITCH INTERCEPT POPUP & FULL MATRIX SHOW --- */
+        #matrix-fullscreen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        #matrix-fullscreen canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+        
+        .matrix-overlay-text {
+            position: relative;
+            z-index: 100000;
+            color: var(--neon-green);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 2rem;
+            text-align: center;
+            background: rgba(0,0,0,0.85);
+            padding: 2rem 4rem;
+            border: 2px solid var(--neon-green);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.4);
+            pointer-events: none;
+            animation: blink 1s infinite alternate;
+        }
+        
+        .matrix-overlay-subtext {
+            font-size: 1rem;
+            color: #fff;
+            margin-top: 1rem;
+            text-transform: uppercase;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 1024px) {
+            .app-container {
+                flex-direction: column;
+            }
+
+            .hud-sidebar {
+                width: 100%;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 2rem;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 2rem;
+                width: 100%;
+            }
+            
+            .cyber-form {
+                grid-template-columns: 1fr;
+            }
+            .form-group-full {
+                grid-column: span 1;
+            }
+            .cyber-btn {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body class="crt-flicker">
+
+    <!-- Interactive Grid matrix canvas in background -->
+    <canvas id="cyber-canvas"></canvas>
+
+    <!-- Fullscreen interactive hacker mode -->
+    <div id="matrix-fullscreen" onclick="stopHackerMode()">
+        <canvas id="fullscreen-matrix-canvas"></canvas>
+        <div class="matrix-overlay-text">
+            SYSTEM HACKED SUCCESSFULLY
+            <div class="matrix-overlay-subtext">[CLICK TO ESCAPE INTERCEPT]</div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        
+        <!-- --- HUD SIDEBAR (LEFT) --- -->
+        <aside class="hud-sidebar">
+            <div>
+                <!-- User Profile Headshot Module -->
+                <div class="hud-profile">
+                    <div class="profile-hex-container">
+                        <img src="./profile.png" alt="Kezia Mariam Roy Portrait" class="profile-hex-image" onerror="this.src='https://placehold.co/300x300/101014/00f0ff?text=Kezia';">
+                    </div>
+                    <h1 class="user-name">Kezia Mariam Roy</h1>
+                    <div class="user-title">Cybersecurity Specialist</div>
+                    <span class="user-status-badge">
+                        <i class="fa-solid fa-circle-dot"></i> SEC_AGENT_ONLINE
+                    </span>
+                </div>
+
+                <!-- HUD Links Navigation -->
+                <nav class="hud-nav">
+                    <ul class="hud-nav-list">
+                        <li class="hud-nav-item">
+                            <a href="#summary" class="hud-nav-link active" onclick="activateLink(this)">
+                                <i class="fa-solid fa-terminal"></i> Overview
+                            </a>
+                        </li>
+                        <li class="hud-nav-item">
+                            <a href="#skills" class="hud-nav-link" onclick="activateLink(this)">
+                                <i class="fa-solid fa-shield-halved"></i> Tech Stack
+                            </a>
+                        </li>
+                        <li class="hud-nav-item">
+                            <a href="#experience" class="hud-nav-link" onclick="activateLink(this)">
+                                <i class="fa-solid fa-server"></i> Experience
+                            </a>
+                        </li>
+                        <li class="hud-nav-item">
+                            <a href="#projects" class="hud-nav-link" onclick="activateLink(this)">
+                                <i class="fa-solid fa-code-branch"></i> Operations
+                            </a>
+                        </li>
+                        <li class="hud-nav-item">
+                            <a href="#education" class="hud-nav-link" onclick="activateLink(this)">
+                                <i class="fa-solid fa-user-graduate"></i> Credentials
+                            </a>
+                        </li>
+                        <li class="hud-nav-item">
+                            <a href="#contact" class="hud-nav-link" onclick="activateLink(this)">
+                                <i class="fa-solid fa-envelope"></i> Uplink
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- HUD Control Panels & System Indicators -->
+            <div class="hud-controls">
+                <div class="hud-control-row">
+                    <span>CRT SCANLINES</span>
+                    <label class="hud-switch">
+                        <input type="checkbox" id="scanline-toggle" checked onchange="toggleScanlines()">
+                        <span class="hud-slider"></span>
+                    </label>
+                </div>
+                <div class="hud-control-row">
+                    <span>MATRIX BACKDROP</span>
+                    <label class="hud-switch">
+                        <input type="checkbox" id="matrix-toggle" checked onchange="toggleMatrix()">
+                        <span class="hud-slider"></span>
+                    </label>
+                </div>
+                <div class="hud-control-row">
+                    <span>CORE ENGINES</span>
+                    <span style="color: var(--neon-cyan)">STABLE</span>
+                </div>
+                
+                <!-- Quick Contacts Info -->
+                <div class="hud-contact-info">
+                    <div class="hud-contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:mariamroykezia@gmail.com">mariamroykezia@gmail.com</a>
+                    </div>
+                    <div class="hud-contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="tel:+919400941931">+91 9400941931</a>
+                    </div>
+                    <div class="hud-contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Pathanamthitta, Kerala</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- --- MAIN CONTENT CONTAINER (RIGHT) --- -->
+        <main class="main-content">
+            
+            <!-- Welcome Shell (Terminal Console Component) -->
+            <div class="terminal-wrapper">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <div class="terminal-btn close" onclick="clearTerminal()"></div>
+                        <div class="terminal-btn minimize"></div>
+                        <div class="terminal-btn maximize" onclick="enterHackerMode()"></div>
+                    </div>
+                    <div class="terminal-title">bash -- session_id: kezia.roy.cyber</div>
+                    <div><i class="fa-solid fa-network-wired" style="color: var(--text-dark);"></i></div>
+                </div>
+                <div class="terminal-body" id="terminal-body">
+                    <div class="terminal-output" id="terminal-output">
+                        <div class="terminal-welcome">
+                            ========================================================================<br>
+                            * SECURE CONSOLE ACCESS INSTANTIATED *<br>
+                            Kezia Mariam Roy - Cyber Forensics & Web App Security Specialist Port.<br>
+                            Type 'help' to view available mainframe diagnostic commands.<br>
+                            ========================================================================
+                        </div>
+                    </div>
+                    <div class="terminal-input-row">
+                        <span class="terminal-prompt">guest@keziaroy:~#</span>
+                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" autofocus placeholder="Type cmd here...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- --- SECTION: OVERVIEW --- -->
+            <section id="summary">
+                <div class="section-header">
+                    <h2 class="cyber-glitch-title" data-text="01 // MISSION STATEMENT">01 // MISSION STATEMENT</h2>
+                </div>
+                
+                <div class="cyber-panel">
+                    <div class="cyber-panel-title">
+                        <i class="fa-solid fa-fingerprint"></i> PROFILE SUMMARY
+                    </div>
+                    <p style="text-align: justify; color: var(--text-main); font-size: 1.15rem; line-height: 1.6;">
+                        Cybersecurity and Digital Forensics professional pursuing an M.Sc. in Cyber Forensics with hands-on experience in vulnerability assessment, cybercrime investigation, and digital evidence analysis. Skilled in web application security testing, Linux environments, and cybersecurity research. Experienced with Burp Suite, TryHackMe, PortSwigger Web Security Academy, and OverTheWire. Strong analytical and problem-solving abilities with a keen interest in cybersecurity operations and digital investigations.
+                    </p>
+                </div>
+            </section>
+
+            <!-- --- SECTION: TECH STACK --- -->
+            <section id="skills">
+                <div class="section-header">
+                    <h2 class="cyber-glitch-title" data-text="02 // TECHNICAL MATRIX">02 // TECHNICAL MATRIX</h2>
+                </div>
+                
+                <div class="skills-grid">
+                    <!-- Skill 1 -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <div class="skill-name">Digital Forensics</div>
+                        <div class="skill-progress-container">
+                            <div class="skill-progress-bar" data-width="90%"></div>
+                        </div>
+                        <div class="skill-level">90% - Expert</div>
+                    </div>
+                    <!-- Skill 2 -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-bug-slash"></i></div>
+                        <div class="skill-name">Vulnerability Assessment</div>
+                        <div class="skill-progress-container">
+                            <div class="skill-progress-bar" data-width="85%"></div>
+                        </div>
+                        <div class="skill-level">85% - Advanced</div>
+                    </div>
+                    <!-- Skill 3 -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                        <div class="skill-name">Web App Sec Testing</div>
+                        <div class="skill-progress-container">
+                            <div class="skill-progress-bar" data-width="88%"></div>
+                        </div>
+                        <div class="skill-level">88% - Advanced</div>
+                    </div>
+                    <!-- Skill 4 -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-ghost"></i></div>
+                        <div class="skill-name">Burp Suite</div>
+                        <div class="skill-progress-container">
+                            <div class="skill-progress-bar" data-width="80%"></div>
+                        </div>
+                        <div class="skill-level">80% - Proficient</div>
+                    </div>
+                    <!-- Skill 5 -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-brands fa-linux"></i></div>
+                        <div class="skill-name">Linux / Unix Shell</div>
+                        <div class="skill-progress-container">
+                            <div class="skill-progress-bar" data-width="85%"></div>
+                        </div>
+                        <div class="skill-level">85% - Proficient</div>
+                    </div>
+                    <!-- Skill 6 -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-shield-virus"></i></div>
+                        <div class="skill-name">OWASP Top 10</div>
+                        <div class="skill-progress-container">
+                            <div class="skill-progress-bar" data-width="85%"></div>
+                        </div>
+                        <div class="skill-level">85% - Expert</div>
+                    </div>
+                    <!-- Skill 7 -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-network-wired"></i></div>
+                        <div class="skill-name">Network Security</div>
+                        <div class="skill-progress-container">
+                            <div class="skill-progress-bar" data-width="78%"></div>
+                        </div>
+                        <div class="skill-level">78% - Advanced</div>
+                    </div>
+                    <!-- Skill 8 -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-cloud-shield"></i></div>
+                        <div class="skill-name">Cloud Security</div>
+                        <div class="skill-progress-container">
+                            <div class="skill-progress-bar" data-width="70%"></div>
+                        </div>
+                        <div class="skill-level">70% - Intermediate</div>
+                    </div>
+                    <!-- Skill 9 -->
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="fa-solid fa-circle-nodes"></i></div>
+                        <div class="skill-name">HTTP Traffic Analysis</div>
+                        <div class="skill-progress-container">
+                            <div class="skill-progress-bar" data-width="82%"></div>
+                        </div>
+                        <div class="skill-level">82% - Advanced</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- --- SECTION: EXPERIENCE --- -->
+            <section id="experience">
+                <div class="section-header">
+                    <h2 class="cyber-glitch-title" data-text="03 // DEPLOYMENT HISTORY">03 // DEPLOYMENT HISTORY</h2>
+                </div>
+                
+                <div class="timeline">
+                    <!-- Internship 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-meta">
+                            <div>
+                                <span class="timeline-role">Cyber Security Intern</span>
+                                <span class="timeline-company"> @ Thiranex</span>
+                            </div>
+                            <span class="timeline-date">Internship</span>
+                        </div>
+                        <div class="timeline-content">
+                            <ul class="timeline-bullets">
+                                <li>Developed and implemented cybersecurity projects focused on password security, vulnerability assessment, phishing detection, and secure authentication systems.</li>
+                                <li>Conducted security testing and vulnerability analysis to identify common weaknesses, including insecure configurations, authentication flaws, and potential attack vectors.</li>
+                                <li>Applied Python, machine learning, and cybersecurity best practices to build tools for threat detection, risk assessment, and secure software development.</li>
+                                <li>Prepared technical documentation and project reports while strengthening practical skills in cryptography, network security, web application security, and cybersecurity research.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Internship 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-meta">
+                            <div>
+                                <span class="timeline-role">Cyber Security Intern</span>
+                                <span class="timeline-company"> @ Tech Cake</span>
+                            </div>
+                            <span class="timeline-date">Internship</span>
+                        </div>
+                        <div class="timeline-content">
+                            <ul class="timeline-bullets">
+                                <li>Supported cybersecurity research initiatives focused on emerging threats, risk mitigation strategies, and industry best practices.</li>
+                                <li>Coordinated technical assessments and hands-on security testing activities across multiple learning and research platforms.</li>
+                                <li>Conducted vulnerability analysis of web applications, identifying security risks including SQL Injection, XSS, authentication weaknesses, and information disclosure issues.</li>
+                                <li>Prepared technical reports, documentation, and knowledge-sharing materials to support project objectives and awareness programs.</li>
+                                <li>Collaborated with cross-functional team members on technology-driven initiatives, strengthening project coordination, communication, and problem-solving capabilities.</li>
+                                <li>Contributed to process improvement by documenting testing methodologies and security assessment procedures.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Internship 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-meta">
+                            <div>
+                                <span class="timeline-role">Cyber Security Intern</span>
+                                <span class="timeline-company"> @ Pathanamthitta District Police</span>
+                            </div>
+                            <span class="timeline-date">Internship</span>
+                        </div>
+                        <div class="timeline-content">
+                            <ul class="timeline-bullets">
+                                <li>Assisted in cybercrime investigation workflows and digital evidence review processes.</li>
+                                <li>Supported the analysis and documentation of cybercrime complaints, helping ensure accurate case tracking and reporting.</li>
+                                <li>Collaborated with law enforcement personnel to understand incident response procedures and cyber threat investigation methodologies.</li>
+                                <li>Participated in cybersecurity awareness and digital safety initiatives aimed at public education and risk reduction.</li>
+                                <li>Developed practical experience in evidence handling, investigative documentation, and stakeholder communication within a regulated environment.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- --- SECTION: OPERATIONS (PROJECTS) --- -->
+            <section id="projects">
+                <div class="section-header">
+                    <h2 class="cyber-glitch-title" data-text="04 // FIELD OPERATIONS">04 // FIELD OPERATIONS</h2>
+                </div>
+                
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <div>
+                            <div class="project-title">
+                                <span>Site Checker</span>
+                                <a href="https://github.com" target="_blank" title="View Codebase"><i class="fa-brands fa-github"></i> Source</a>
+                            </div>
+                            <div style="font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; color: var(--neon-cyan); margin-bottom: 1rem;">
+                                Website Security & Analysis Tool
+                            </div>
+                            <p class="project-desc">
+                                A web-based application designed for real-time security assessment and reconnaissance, enabling users to inspect HTTP responses and analyze target structures.
+                            </p>
+                            <ul class="project-bullets">
+                                <li>Developed robust engine for remote HTTP header inspection and server configuration auditing.</li>
+                                <li>Built functionality to dynamically map remote technologies, CMS systems, and configuration errors.</li>
+                                <li>Applied passive reconnaissance methodologies to retrieve and report security metadata safely.</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">Git</span>
+                            <span class="tech-tag">Recon</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <div>
+                            <div class="project-title">
+                                <span>Cyber Ranges & Training</span>
+                                <span style="font-size: 0.8rem; color: var(--neon-pink);"><i class="fa-solid fa-biohazard"></i> ACTIVE_DRILLS</span>
+                            </div>
+                            <div style="font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; color: var(--neon-pink); margin-bottom: 1rem;">
+                                Active Training & Skill Penetration
+                            </div>
+                            <p class="project-desc">
+                                Ongoing execution of offensive security drills, binary exploitation, and forensic challenges in sandboxed cybersecurity platforms.
+                            </p>
+                            <ul class="project-bullets">
+                                <li>Completed structured labs covering advanced OWASP vulnerability exploits on PortSwigger Academy.</li>
+                                <li>Executed Linux administration drills and capture-the-flag (CTF) challenges on OverTheWire.</li>
+                                <li>Conducted extensive traffic capturing, filtering, and manual packet manipulation using Burp Suite.</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech-tags">
+                            <span class="tech-tag">TryHackMe</span>
+                            <span class="tech-tag">PortSwigger</span>
+                            <span class="tech-tag">Burp Suite</span>
+                            <span class="tech-tag">OverTheWire</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- --- SECTION: EDUCATION & CREDENTIALS --- -->
+            <section id="education">
+                <div class="section-header">
+                    <h2 class="cyber-glitch-title" data-text="05 // SCHOLASTIC CORE">05 // SCHOLASTIC CORE</h2>
+                </div>
+                
+                <div class="edu-grid">
+                    <!-- Academic 1 -->
+                    <div class="edu-card">
+                        <div>
+                            <div class="edu-degree">M.Sc. in Cyber Forensics</div>
+                            <div class="edu-institute">Dr. M.G.R. Educational and Research Institute</div>
+                            <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Chennai, Tamil Nadu</div>
+                        </div>
+                        <div class="edu-meta">
+                            <span>ACADEMICS</span>
+                            <span style="color: var(--neon-cyan);">2025 - PRESENT</span>
+                        </div>
+                    </div>
+
+                    <!-- Academic 2 -->
+                    <div class="edu-card">
+                        <div>
+                            <div class="edu-degree">B.Sc. in Forensic Science</div>
+                            <div class="edu-institute">Kristu Jayanti College</div>
+                            <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Bengaluru, Karnataka</div>
+                        </div>
+                        <div class="edu-meta">
+                            <span>ACADEMICS</span>
+                            <span style="color: var(--neon-cyan);">2022 - 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: #fff; margin-bottom: 1.5rem; letter-spacing: 1px; text-transform: uppercase;">
+                    <i class="fa-solid fa-award" style="color: var(--neon-pink); margin-right: 0.5rem;"></i> Verified Accreditations
+                </div>
+                
+                <div class="cert-list">
+                    <!-- Cert 4 -->
+                    <div class="cert-item">
+                        <div class="cert-icon"><i class="fa-solid fa-shield-virus"></i></div>
+                        <div>
+                            <div class="cert-name">SQL Injection Attacks</div>
+                            <div class="cert-issuer">EC-Council</div>
+                        </div>
+                    </div>
+                    <!-- Cert 1 -->
+                    <div class="cert-item">
+                        <div class="cert-icon"><i class="fa-solid fa-user-shield"></i></div>
+                        <div>
+                            <div class="cert-name">Ethical Hacking</div>
+                            <div class="cert-issuer">IBM / Kali Linux</div>
+                        </div>
+                    </div>
+                    <!-- Cert 2 -->
+                    <div class="cert-item">
+                        <div class="cert-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <div>
+                            <div class="cert-name">Foundations of Cybersecurity</div>
+                            <div class="cert-issuer">Google</div>
+                        </div>
+                    </div>
+                    <!-- Cert 3 -->
+                    <div class="cert-item">
+                        <div class="cert-icon"><i class="fa-solid fa-network-wired"></i></div>
+                        <div>
+                            <div class="cert-name">Intro to Cybersecurity</div>
+                            <div class="cert-issuer">Cisco Academy</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- --- SECTION: CONTACT (UPLINK) --- -->
+            <section id="contact">
+                <div class="section-header">
+                    <h2 class="cyber-glitch-title" data-text="06 // UPLINK ESTABLISHMENT">06 // UPLINK ESTABLISHMENT</h2>
+                </div>
+                
+                <div class="contact-content">
+                    
+                    <!-- Contact Cards -->
+                    <div class="contact-details-grid">
+                        <div class="contact-box">
+                            <div class="contact-box-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+                            <div>
+                                <div class="contact-box-title">Secure Comm Channel</div>
+                                <div class="contact-box-value"><a href="mailto:mariamroykezia@gmail.com">mariamroykezia@gmail.com</a></div>
+                            </div>
+                        </div>
+                        <div class="contact-box">
+                            <div class="contact-box-icon"><i class="fa-solid fa-tty"></i></div>
+                            <div>
+                                <div class="contact-box-title">Direct Dial Unit</div>
+                                <div class="contact-box-value"><a href="tel:+919400941931">+91 9400941931</a></div>
+                            </div>
+                        </div>
+                        <div class="contact-box">
+                            <div class="contact-box-icon"><i class="fa-brands fa-linkedin"></i></div>
+                            <div>
+                                <div class="contact-box-title">LinkedIn Grid Matrix</div>
+                                <div class="contact-box-value">
+                                    <a href="https://in.linkedin.com/in/kezia-mariam-roy-126870254" target="_blank">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cyber Form -->
+                    <div class="cyber-panel" style="border-left-color: var(--neon-pink); border-radius: 8px 0 0 8px;">
+                        <div class="cyber-panel-title" style="color: var(--neon-pink);">
+                            <i class="fa-solid fa-paper-plane"></i> TRANSMIT DATA ENVELOPE
+                        </div>
+                        
+                        <form class="cyber-form" onsubmit="event.preventDefault(); alert('Transmission simulated successfully. Signal packet broadcasted.');">
+                            <div class="cyber-input-group">
+                                <label class="cyber-label">Operator Name</label>
+                                <input type="text" class="cyber-input" required placeholder="User ID">
+                            </div>
+                            <div class="cyber-input-group">
+                                <label class="cyber-label">Operator Uplink (Email)</label>
+                                <input type="email" class="cyber-input" required placeholder="name@domain.com">
+                            </div>
+                            <div class="cyber-input-group form-group-full">
+                                <label class="cyber-label">Data Payload Subject</label>
+                                <input type="text" class="cyber-input" required placeholder="Scope Definition">
+                            </div>
+                            <div class="cyber-input-group form-group-full">
+                                <label class="cyber-label">Encrypted Message Body</label>
+                                <textarea class="cyber-input" required placeholder="Type your data envelope payload here..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="cyber-btn">
+                                <i class="fa-solid fa-broadcast-tower"></i> BROADCAST ENVELOPE
+                            </button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <!-- --- FOOTER --- -->
+            <footer class="footer">
+                <div class="footer-left">
+                    <span>DESIGNATION // KEZIA MARIAM ROY // © 2026</span>
+                </div>
+                <div class="footer-right">
+                    <a href="#summary">Mainframe</a>
+                    <a href="https://in.linkedin.com/in/kezia-mariam-roy-126870254" target="_blank">LinkedIn</a>
+                    <a href="mailto:mariamroykezia@gmail.com">Uplink</a>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- --- CYBER SCRIPTS --- -->
+    <script>
+        // --- MATRIX BACKGROUND DRIFT ENGINE ---
+        const canvas = document.getElementById('cyber-canvas');
+        const ctx = canvas.getContext('2d');
+        let animationFrameId;
+        let isMatrixActive = true;
+
+        const hexChars = "0123456789ABCDEFHIJKLMNOPQRSTUVWXYZ$_#@&*";
+        const charArr = hexChars.split("");
+        const fontSize = 14;
+        let columns;
+        let drops = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            columns = Math.floor(canvas.width / fontSize);
+            drops = [];
+            for (let x = 0; x < columns; x++) {
+                drops[x] = Math.random() * -100; // stagger starting positions
+            }
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function drawMatrix() {
+            if (!isMatrixActive) return;
+            
+            // Subtle fade effect to trail letters
+            ctx.fillStyle = 'rgba(10, 10, 12, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Set letter style (Cyan color matching cyberpunk scheme)
+            ctx.fillStyle = '#00f0ff';
+            ctx.font = fontSize + 'px "Share Tech Mono"';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArr[Math.floor(Math.random() * charArr.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+            animationFrameId = requestAnimationFrame(drawMatrix);
+        }
+        
+        // Start Matrix Rain
+        drawMatrix();
+
+        function toggleMatrix() {
+            const cb = document.getElementById('matrix-toggle');
+            if (cb.checked) {
+                isMatrixActive = true;
+                canvas.style.opacity = '0.08';
+                drawMatrix();
+            } else {
+                isMatrixActive = false;
+                cancelAnimationFrame(animationFrameId);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                canvas.style.opacity = '0';
+            }
+        }
+
+        // --- CRT SCANLINES ENGINE ---
+        function toggleScanlines() {
+            const cb = document.getElementById('scanline-toggle');
+            if (cb.checked) {
+                document.body.classList.add('crt-flicker');
+            } else {
+                document.body.classList.remove('crt-flicker');
+            }
+        }
+
+        // --- HUD ACTIVE LINK TRACKER ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.hud-nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 250)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        function activateLink(link) {
+            navLinks.forEach(item => item.classList.remove('active'));
+            link.classList.add('active');
+        }
+
+        // --- SKILL LEVEL PROGRESS BAR ANIMATION ---
+        const skillsSection = document.getElementById('skills');
+        const progressBars = document.querySelectorAll('.skill-progress-bar');
+
+        const triggerSkillsAnimation = () => {
+            const sectionPos = skillsSection.getBoundingClientRect().top;
+            const screenHeight = window.innerHeight;
+            if (sectionPos < screenHeight - 100) {
+                progressBars.forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-width');
+                });
+            }
+        };
+
+        window.addEventListener('scroll', triggerSkillsAnimation);
+        // Trigger initially in case page loads scrolled down
+        triggerSkillsAnimation();
+
+        // --- INTERACTIVE CYBER COMMAND LINE TERMINAL ---
+        const terminalBody = document.getElementById('terminal-body');
+        const terminalOutput = document.getElementById('terminal-output');
+        const terminalInput = document.getElementById('terminal-input');
+        
+        const commands = {
+            help: `Available commands:<br>
+  <span class="warning">about</span>      - Retrieve personnel mission statement.<br>
+  <span class="warning">skills</span>     - Audit technical expertise and skills matrix.<br>
+  <span class="warning">experience</span> - Log trace deployment & internship history.<br>
+  <span class="warning">projects</span>   - Diagnostics of cyber defense operations & repositories.<br>
+  <span class="warning">education</span>  - Print scholastic background & certifications.<br>
+  <span class="warning">contact</span>    - Extract uplink coordinates.<br>
+  <span class="warning">clear</span>      - Flush terminal stack memory.<br>
+  <span class="warning">matrix</span>     - Establish digital matrix background flow.<br>
+  <span class="warning">hack</span>       - EXECUTE MAXIMUM OVERRIDE PROTOCOL.`,
+            
+            about: `<span class="success">[SYSTEM READ] Personnel: Kezia Mariam Roy</span><br>
+Cybersecurity and Digital Forensics professional currently pursuing M.Sc. in Cyber Forensics.<br>
+Strong expertise in vulnerability scanning, threat intelligence, and legal digital investigations.`,
+            
+            skills: `<span class="success">[SKILLS METADATA DECRYPTED]</span><br>
+- Digital Forensics & Forensic Science Analysis [90%]<br>
+- Web Application Security Testing & OWASP Top 10 [88%]<br>
+- Vulnerability Assessment (Burp Suite, OWASP Zap) [85%]<br>
+- Linux Environments & Scripting Security [85%]<br>
+- Network Audit & Security Protocols [78%]`,
+            
+            experience: `<span class="success">[DEPLOYMENT TIMELINE LOGS]</span><br>
+* <span class="warning">Cyber Security Intern</span> | Thiranex<br>
+  - Developed and implemented projects on password security and secure authentication.<br>
+  - Applied Python and ML to build threat detection tools.<br>
+* <span class="warning">Cyber Security Intern</span> | Tech Cake<br>
+  - Assessed security postures of Web apps (XSS, SQLi, Auth bypass).<br>
+  - Audited risk mitigation strategies and documented security postures.<br>
+* <span class="warning">Cyber Security Intern</span> | Pathanamthitta District Police<br>
+  - Assisted state cybercrime forensic units on digital investigations.<br>
+  - Documented evidence integrity protocols and cyber safety initiatives.`,
+            
+            projects: `<span class="success">[ACTIVE OPERATIONS]</span><br>
+* <span class="warning">Site Checker</span> - Website Security & Analysis Tool<br>
+  - Developed with Python / Flask.<br>
+  - Audits HTTP headers and analyzes remote server structures.<br>
+* <span class="warning">Capture-The-Flag (CTF) Drills</span><br>
+  - Active penetration challenges on TryHackMe, PortSwigger, OverTheWire.`,
+            
+            education: `<span class="success">[CREDENTIAL FILE]</span><br>
+* M.Sc. Cyber Forensics (2025 - Present) | Dr. M.G.R. Educational Inst.<br>
+* B.Sc. Forensic Science (2022 - 2025) | Kristu Jayanti College<br>
+<br>
+<span class="success">[ACCREDITATIONS]</span><br>
+* EC-Council - SQL Injection Attacks<br>
+* IBM - Ethical Hacking with Kali Linux<br>
+* Google - Foundations of Cybersecurity<br>
+* Cisco - Introduction to Cybersecurity`,
+            
+            contact: `<span class="success">[UPLINK PROTOCOLS ACTIVE]</span><br>
+- Email: <a href="mailto:mariamroykezia@gmail.com" style="color: var(--neon-cyan)">mariamroykezia@gmail.com</a><br>
+- Phone: +91 9400941931<br>
+- LinkedIn: <a href="https://in.linkedin.com/in/kezia-mariam-roy-126870254" target="_blank" style="color: var(--neon-cyan)">kezia-mariam-roy-126870254</a>`,
+            
+            matrix: `Activating backdrop matrix streams... Done.`,
+            
+            hack: `ALERT: OVERRIDE DETECTED. INITIATING PROTOCOL: 0x889F...`
+        };
+
+        terminalInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const value = terminalInput.value.trim().toLowerCase();
+                terminalInput.value = '';
+                
+                if (value === '') return;
+                
+                // Add command echo to output
+                const echoLine = document.createElement('div');
+                echoLine.className = 'terminal-line cmd-echo';
+                echoLine.innerHTML = `guest@keziaroy:~# ${value}`;
+                terminalOutput.appendChild(echoLine);
+                
+                // Process Command
+                const responseLine = document.createElement('div');
+                responseLine.className = 'terminal-line';
+                
+                if (value === 'clear') {
+                    terminalOutput.innerHTML = '';
+                    terminalBody.scrollTop = 0;
+                    return;
+                } else if (value === 'matrix') {
+                    document.getElementById('matrix-toggle').checked = true;
+                    toggleMatrix();
+                    responseLine.innerHTML = commands.matrix;
+                } else if (value === 'hack') {
+                    responseLine.className = 'terminal-line warning';
+                    responseLine.innerHTML = commands.hack;
+                    terminalOutput.appendChild(responseLine);
+                    setTimeout(() => {
+                        enterHackerMode();
+                    }, 1000);
+                    terminalBody.scrollTop = terminalBody.scrollHeight;
+                    return;
+                } else if (commands[value]) {
+                    responseLine.innerHTML = commands[value];
+                } else {
+                    responseLine.className = 'terminal-line warning';
+                    responseLine.innerHTML = `Command not recognized: '${value}'. Type 'help' for mainframe index.`;
+                }
+                
+                terminalOutput.appendChild(responseLine);
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }
+        });
+
+        // --- MATRIX FULLSCREEN SCREEN INTERCEPT HACK MODE ---
+        let fullMatrixInterval;
+        let isHackerModeActive = false;
+        
+        function enterHackerMode() {
+            const fullscreenDiv = document.getElementById('matrix-fullscreen');
+            const fsCanvas = document.getElementById('fullscreen-matrix-canvas');
+            const fsCtx = fsCanvas.getContext('2d');
+            
+            fullscreenDiv.style.display = 'flex';
+            isHackerModeActive = true;
+            
+            fsCanvas.width = window.innerWidth;
+            fsCanvas.height = window.innerHeight;
+            
+            const fsCols = Math.floor(fsCanvas.width / 16);
+            const fsDrops = [];
+            for (let x = 0; x < fsCols; x++) {
+                fsDrops[x] = Math.random() * -100;
+            }
+            
+            function drawFullscreenMatrix() {
+                if (!isHackerModeActive) return;
+                
+                fsCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                fsCtx.fillRect(0, 0, fsCanvas.width, fsCanvas.height);
+                
+                fsCtx.fillStyle = '#39ff14'; // Hacker Green
+                fsCtx.font = '16px "Share Tech Mono"';
+                
+                for (let i = 0; i < fsDrops.length; i++) {
+                    const text = hexChars[Math.floor(Math.random() * hexChars.length)];
+                    fsCtx.fillText(text, i * 16, fsDrops[i] * 16);
+                    
+                    if (fsDrops[i] * 16 > fsCanvas.height && Math.random() > 0.98) {
+                        fsDrops[i] = 0;
+                    }
+                    fsDrops[i]++;
+                }
+            }
+            
+            fullMatrixInterval = setInterval(drawFullscreenMatrix, 30);
+        }
+        
+        function stopHackerMode() {
+            isHackerModeActive = false;
+            clearInterval(fullMatrixInterval);
+            document.getElementById('matrix-fullscreen').style.display = 'none';
+            
+            const returnLine = document.createElement('div');
+            returnLine.className = 'terminal-line success';
+            returnLine.innerHTML = `[CONNECTION RE-ESTABLISHED] System returned to baseline state.`;
+            terminalOutput.appendChild(returnLine);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        function clearTerminal() {
+            terminalOutput.innerHTML = `<div class="terminal-welcome">[CONSOLE STACK FLUSHED] Ready for new connections. Type 'help'.</div>`;
+        }
+
+        // Prevent accidental default typing behaviors
+        document.querySelector('.terminal-wrapper').addEventListener('click', () => {
+            terminalInput.focus();
+        });
+    </script>
+</body>
+</html>
