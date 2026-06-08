@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -275,6 +275,51 @@
             0% { opacity: 0.3; }
             50% { opacity: 1; }
             100% { opacity: 0.3; }
+        }
+
+        .hud-profile-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1.2rem;
+            padding: 0 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hud-profile-links {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 1rem;
+            }
+        }
+
+        .cyber-btn-small {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.6rem 1rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.25s ease;
+            box-shadow: inset 0 0 5px rgba(0, 240, 255, 0.1);
+        }
+
+        .cyber-btn-small:hover {
+            background: rgba(0, 240, 255, 0.08);
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.2), inset 0 0 8px rgba(255, 0, 85, 0.1);
+            text-shadow: var(--glow-pink);
+            transform: translateY(-2px);
         }
 
         /* HUD Navigation Links */
@@ -1034,21 +1079,21 @@
 
         /* --- CONTACT & FOOTER --- */
         .contact-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        
-        @media(min-width: 900px) {
-            .contact-content {
-                grid-template-columns: 1fr 1.5fr;
-            }
+            display: block;
+            width: 100%;
         }
 
         .contact-details-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1rem;
+            gap: 1.5rem;
+            width: 100%;
+        }
+        
+        @media(min-width: 768px) {
+            .contact-details-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         .contact-box {
@@ -1294,6 +1339,38 @@
                 padding: 2rem;
             }
 
+            .hud-nav-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+            .hud-nav-item {
+                margin-bottom: 0;
+            }
+            .hud-nav-link {
+                border-left: none;
+                border-bottom: 2px solid transparent;
+                padding: 0.5rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            .hud-nav-link:hover, .hud-nav-link.active {
+                border-left: none;
+                border-bottom: 2px solid var(--neon-cyan);
+            }
+            .hud-contact-info {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+            .hud-contact-item {
+                margin-bottom: 0;
+            }
+
             .main-content {
                 margin-left: 0;
                 padding: 2rem;
@@ -1341,6 +1418,17 @@
                     <span class="user-status-badge">
                         <i class="fa-solid fa-circle-dot"></i> SEC_AGENT_ONLINE
                     </span>
+                    <div class="hud-profile-links">
+                        <a href="https://www.linkedin.com/in/kezia-mariam-roy-126870254/" target="_blank" class="cyber-btn-small">
+                            <i class="fa-brands fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/mariamroykezia-design" target="_blank" class="cyber-btn-small">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                        <a href="https://drive.google.com/file/d/1tQXo1SmhpENXLCytRpaU1vzglDb76iy-/view?usp=sharing" target="_blank" class="cyber-btn-small">
+                            <i class="fa-solid fa-file-pdf"></i> Resume
+                        </a>
+                    </div>
                 </div>
 
                 <!-- HUD Links Navigation -->
@@ -1405,11 +1493,11 @@
                 <div class="hud-contact-info">
                     <div class="hud-contact-item">
                         <i class="fa-solid fa-envelope"></i>
-                        <a href="mailto:mariamroykezia@gmail.com">mariamroykezia@gmail.com</a>
+                        <span>mari************@gmail.com</span>
                     </div>
                     <div class="hud-contact-item">
                         <i class="fa-solid fa-phone"></i>
-                        <a href="tel:+919400941931">+91 9400941931</a>
+                        <span>+91 9400******</span>
                     </div>
                     <div class="hud-contact-item">
                         <i class="fa-solid fa-location-dot"></i>
@@ -1773,21 +1861,20 @@
                 </div>
                 
                 <div class="contact-content">
-                    
                     <!-- Contact Cards -->
                     <div class="contact-details-grid">
                         <div class="contact-box">
                             <div class="contact-box-icon"><i class="fa-solid fa-satellite-dish"></i></div>
                             <div>
                                 <div class="contact-box-title">Secure Comm Channel</div>
-                                <div class="contact-box-value"><a href="mailto:mariamroykezia@gmail.com">mariamroykezia@gmail.com</a></div>
+                                <div class="contact-box-value">mari************@gmail.com</div>
                             </div>
                         </div>
                         <div class="contact-box">
                             <div class="contact-box-icon"><i class="fa-solid fa-tty"></i></div>
                             <div>
                                 <div class="contact-box-title">Direct Dial Unit</div>
-                                <div class="contact-box-value"><a href="tel:+919400941931">+91 9400941931</a></div>
+                                <div class="contact-box-value">+91 9400******</div>
                             </div>
                         </div>
                         <div class="contact-box">
@@ -1795,42 +1882,11 @@
                             <div>
                                 <div class="contact-box-title">LinkedIn Grid Matrix</div>
                                 <div class="contact-box-value">
-                                    <a href="https://in.linkedin.com/in/kezia-mariam-roy-126870254" target="_blank">View Profile</a>
+                                    <a href="https://www.linkedin.com/in/kezia-mariam-roy-126870254/" target="_blank">View Profile</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Cyber Form -->
-                    <div class="cyber-panel" style="border-left-color: var(--neon-pink); border-radius: 8px 0 0 8px;">
-                        <div class="cyber-panel-title" style="color: var(--neon-pink);">
-                            <i class="fa-solid fa-paper-plane"></i> TRANSMIT DATA ENVELOPE
-                        </div>
-                        
-                        <form class="cyber-form" onsubmit="event.preventDefault(); alert('Transmission simulated successfully. Signal packet broadcasted.');">
-                            <div class="cyber-input-group">
-                                <label class="cyber-label">Operator Name</label>
-                                <input type="text" class="cyber-input" required placeholder="User ID">
-                            </div>
-                            <div class="cyber-input-group">
-                                <label class="cyber-label">Operator Uplink (Email)</label>
-                                <input type="email" class="cyber-input" required placeholder="name@domain.com">
-                            </div>
-                            <div class="cyber-input-group form-group-full">
-                                <label class="cyber-label">Data Payload Subject</label>
-                                <input type="text" class="cyber-input" required placeholder="Scope Definition">
-                            </div>
-                            <div class="cyber-input-group form-group-full">
-                                <label class="cyber-label">Encrypted Message Body</label>
-                                <textarea class="cyber-input" required placeholder="Type your data envelope payload here..."></textarea>
-                            </div>
-                            
-                            <button type="submit" class="cyber-btn">
-                                <i class="fa-solid fa-broadcast-tower"></i> BROADCAST ENVELOPE
-                            </button>
-                        </form>
-                    </div>
-                    
                 </div>
             </section>
 
@@ -1841,8 +1897,8 @@
                 </div>
                 <div class="footer-right">
                     <a href="#summary">Mainframe</a>
-                    <a href="https://in.linkedin.com/in/kezia-mariam-roy-126870254" target="_blank">LinkedIn</a>
-                    <a href="mailto:mariamroykezia@gmail.com">Uplink</a>
+                    <a href="https://www.linkedin.com/in/kezia-mariam-roy-126870254/" target="_blank">LinkedIn</a>
+                    <a href="#contact">Uplink</a>
                 </div>
             </footer>
 
@@ -1983,6 +2039,7 @@
   <span class="warning">experience</span> - Log trace deployment & internship history.<br>
   <span class="warning">projects</span>   - Diagnostics of cyber defense operations & repositories.<br>
   <span class="warning">education</span>  - Print scholastic background & certifications.<br>
+  <span class="warning">resume</span>     - Access Google Drive resume document.<br>
   <span class="warning">contact</span>    - Extract uplink coordinates.<br>
   <span class="warning">clear</span>      - Flush terminal stack memory.<br>
   <span class="warning">matrix</span>     - Establish digital matrix background flow.<br>
@@ -2027,10 +2084,14 @@ Strong expertise in vulnerability scanning, threat intelligence, and legal digit
 * Google - Foundations of Cybersecurity<br>
 * Cisco - Introduction to Cybersecurity`,
             
+            resume: `<span class="success">[RESUME DATA DECRYPTED]</span><br>
+- Google Drive Resume: <a href="https://drive.google.com/file/d/1tQXo1SmhpENXLCytRpaU1vzglDb76iy-/view?usp=sharing" target="_blank" style="color: var(--neon-cyan)">View Resume</a>`,
+            
             contact: `<span class="success">[UPLINK PROTOCOLS ACTIVE]</span><br>
-- Email: <a href="mailto:mariamroykezia@gmail.com" style="color: var(--neon-cyan)">mariamroykezia@gmail.com</a><br>
-- Phone: +91 9400941931<br>
-- LinkedIn: <a href="https://in.linkedin.com/in/kezia-mariam-roy-126870254" target="_blank" style="color: var(--neon-cyan)">kezia-mariam-roy-126870254</a>`,
+- Email: mari************@gmail.com<br>
+- Phone: +91 9400******<br>
+- LinkedIn: <a href="https://www.linkedin.com/in/kezia-mariam-roy-126870254/" target="_blank" style="color: var(--neon-cyan)">kezia-mariam-roy-126870254</a><br>
+- GitHub: <a href="https://github.com/mariamroykezia-design" target="_blank" style="color: var(--neon-cyan)">mariamroykezia-design</a>`,
             
             matrix: `Activating backdrop matrix streams... Done.`,
             
